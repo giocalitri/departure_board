@@ -8,7 +8,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from ui.apis import fetch_mbta_times
+from ui.apis import get_mbta_stations_boards
 
 
 class DepartureBoardFeed(APIView):
@@ -23,7 +23,7 @@ class DepartureBoardFeed(APIView):
         """
 
         try:
-            return Response(data=fetch_mbta_times())
+            return Response(data=get_mbta_stations_boards())
         except requests.exceptions.HTTPError:
             return Response(
                 data={'error': 'mbta_backend_error'},

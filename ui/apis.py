@@ -11,15 +11,15 @@ from django.conf import settings
 
 def fetch_mbta_times():
     """
-    Takes care of fetching the data from the MBTA API and parsing the content.
+    Takes care of fetching the data from the MBTA API.
     The fields expected from the CSV file are:
-    TimeStamp, Origin, Trip, Destination, ScheduledTime, Lateness, Track, Status,
+    TimeStamp, Origin, Trip, Destination, ScheduledTime, Lateness, Track, Status
 
     Args:
         None
 
     Returns:
-        list: A list of dictionaries representing the data coming from the MBTA API
+        csv.DictReader: a cvs reader for the data coming from the MBTA API
 
     Raises:
         csv.Error: csv parsing errors are intentionally not handled
@@ -30,7 +30,19 @@ def fetch_mbta_times():
     mbta_data_list = response.text.splitlines()
     # the first row contains the fields
     fields = mbta_data_list[0].split(',')
-    reader = csv.DictReader(mbta_data_list[1:], fields)
+    return csv.DictReader(mbta_data_list[1:], fields)
+
+
+def get_mbta_stations_boards():
+    """
+    Retrieves and formats the data coming from the MBTA API.
+    Args:
+        None
+
+    Returns:
+        dict: A dictionary representing the formatted data coming from the MBTA API
+    """
+    reader = fetch_mbta_times()
     # read the data and reformat some fields
     now = datetime.now(tz=pytz.timezone('US/Eastern'))
     formatted_data = {
