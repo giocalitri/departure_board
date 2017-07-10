@@ -32,20 +32,33 @@ def fetch_mbta_times():
     fields = mbta_data_list[0].split(',')
     reader = csv.DictReader(mbta_data_list[1:], fields)
     # read the data and reformat some fields
-    formatted_data = []
+    now = datetime.now(tz=pytz.timezone('US/Eastern'))
+    formatted_data = {
+        'CurrentTime': now.strftime('%I:%M %p'),
+        'CurrentDate': now.strftime('%m-%d-%Y'),
+        'CurrentWeekDay': now.strftime('%A'),
+    }
     for row in reader:
         formatted_row = {}
+        station = ''
         for key, value in row.items():
-            formatted_row[key] = value
-            if key == 'ScheduledTime':
+            if key == "Origin":
+                station = value
+                continue
+            elif key == 'TimeStamp':
+                continue
+            elif key == 'ScheduledTime':
                 parsed_time = datetime.fromtimestamp(int(value), tz=pytz.timezone('US/Eastern'))
                 formatted_row['ScheduledHour'] = parsed_time.strftime('%I:%M %p')
                 formatted_row['ScheduledDay'] = parsed_time.strftime('%b %d')
             elif key == 'Lateness':
                 # round to the bottom integer
                 formatted_row['LatenessMinutes'] = int(round(int(value)/60))
-        formatted_data.append(formatted_row)
-    # sort by ScheduledTime just to be sure to return all the values in the correct order
-    formatted_data.sort(key=lambda x: x['ScheduledTime'])
+                continue
+            formatted_row[key] = value
 
+        formatted_data.setdefault(station, []).append(formatted_row)
+    # sort by ScheduledTime just to be sure to return all the values in the correct order
+    formatted_data['North Station'].sort(key=lambda x: x['ScheduledTime'])
+    formatted_data['South Station'].sort(key=lambda x: x['ScheduledTime'])
     return formatted_data
