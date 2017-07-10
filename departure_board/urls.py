@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from ui.views import DepartureBoardFeed
+from ui import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v0/departure_board_feed/$', DepartureBoardFeed.as_view(), name='departure_board_feed'),
+    url(r'^$', views.Index.as_view(), name='index'),
+    url(r'^api/v0/departure_board_feed/$', views.DepartureBoardFeed.as_view(), name='departure_board_feed'),
 ]

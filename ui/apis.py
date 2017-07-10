@@ -20,9 +20,6 @@ def fetch_mbta_times():
 
     Returns:
         csv.DictReader: a cvs reader for the data coming from the MBTA API
-
-    Raises:
-        csv.Error: csv parsing errors are intentionally not handled
     """
     # fetch the data
     response = requests.get(settings.DEPARTURE_BOARD_URL)
