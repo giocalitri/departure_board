@@ -122,4 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Custom settings
-DEPARTURE_BOARD_URL = os.environ.get('DEPARTURE_BOARD_URL', 'http://developer.mbta.com/lib/gtrtfs/Departures.csv')
+DEPARTURE_BOARD_URL = os.environ.get(
+    'DEPARTURE_BOARD_URL', 'http://developer.mbta.com/lib/gtrtfs/Departures.csv')
