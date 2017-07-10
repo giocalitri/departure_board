@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from ui.views import DepartureBoardFeed
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^api/v0/departure_board_feed/$', DepartureBoardFeed.as_view(), name='departure_board_feed'),
 ]
