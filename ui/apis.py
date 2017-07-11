@@ -65,6 +65,9 @@ def get_mbta_stations_boards():
                 formatted_row['LatenessMinutes'] = int(round(int(value)/60))
                 continue
             formatted_row[key] = value
+        # special case: the train is late, so the status need to be updated with the lateness
+        if formatted_row['Status'] in ('Delayed', 'Late', ):
+            formatted_row['Status'] = '{} {} min'.format(formatted_row['Status'], formatted_row['LatenessMinutes'])
 
         formatted_data.setdefault(station, []).append(formatted_row)
     # sort by ScheduledTime just to be sure to return all the values in the correct order
