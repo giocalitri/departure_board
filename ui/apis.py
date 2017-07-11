@@ -7,9 +7,13 @@ from datetime import datetime
 import pytz
 import requests
 from django.conf import settings
+from django.core.cache import caches
+
+cache = caches['default']
+CACHE_KEY = 'mbta_data'
 
 
-def fetch_mbta_times():
+def fetch_data_from_mbta():
     """
     Takes care of fetching the data from the MBTA API.
     The fields expected from the CSV file are:
@@ -30,7 +34,7 @@ def fetch_mbta_times():
     return csv.DictReader(mbta_data_list[1:], fields)
 
 
-def get_mbta_stations_boards():
+def get_formatted_mbta_data():
     """
     Retrieves and formats the data coming from the MBTA API.
     Args:
@@ -39,7 +43,7 @@ def get_mbta_stations_boards():
     Returns:
         dict: A dictionary representing the formatted data coming from the MBTA API
     """
-    reader = fetch_mbta_times()
+    reader = fetch_data_from_mbta()
     # read the data and reformat some fields
     now = datetime.now(tz=pytz.timezone('US/Eastern'))
     formatted_data = {
@@ -74,3 +78,22 @@ def get_mbta_stations_boards():
     formatted_data['North Station'].sort(key=lambda x: x['ScheduledTime'])
     formatted_data['South Station'].sort(key=lambda x: x['ScheduledTime'])
     return formatted_data
+
+
+def get_mbta_stations_boards():
+    """
+    Retrieved data for the front end: either it fetched it from new data or uses the cached one
+
+    Args:
+        None
+
+    Returns:
+        dict: A dictionary representing the formatted data coming from the MBTA API
+    """
+    cached_data = cache.get(CACHE_KEY)
+    if cached_data is not None:
+        return cached_data
+
+    fresh_data = get_formatted_mbta_data()
+    cache.set(CACHE_KEY, fresh_data, 30)
+    return fresh_data
