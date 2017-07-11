@@ -38,7 +38,33 @@
       $('.current-week-day').text(data.CurrentWeekDay);
       $('.current-time').text(data.CurrentTime);
       $('.current-date').text(data.CurrentDate);
+      // format the train infos
+      let $trainInfoElements = $();
+      data[station].forEach(function(trainInfo){
+        let $trainInfoElement = $("<div></div>", {"class": "row"});
+        $trainInfoElement.appendTo('.train-info');
+        $("<div/>", {"class": "col-lg-2"}).text('MBTA').appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-lg-1"}).text(trainInfo.ScheduledHour).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-lg-4"}).text(trainInfo.Destination).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-lg-1"}).text(trainInfo.Trip).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-lg-1"}).text(trainInfo.Track).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-lg-3"}).text(trainInfo.Status).appendTo($trainInfoElement);
+        /*
 
+
+        //$trainInfoElements.add($trainInfoElement);
+        $trainInfoElement.appendTo('.train-info');
+        */
+      });
+
+        //< div class="row train-info">
+    	//  <div class="col-lg-2">Carrier</div>
+    	//  <div class="col-lg-1">Time</div>
+    	//  <div class="col-lg-4">Destination</div>
+    	//  <div class="col-lg-1">Train#</div>
+    	//  <div class="col-lg-1">Track#</div>
+    	//  <div class="col-lg-3">Status</div>
+    	//</div
 	};
 
     $(document).ready(function() {
@@ -50,14 +76,14 @@
 <body>
   <div class="container departure-board">
 	<div class="row title1">
-	  <div class="col-lg-3 current-week-day"></div>
+	  <div class="col-lg-3 current-week-day">&nbsp;</div>
 	  <div class="col-lg-6 station-name-field"><span class="station-name">North station</span> train information</div>
 	  <div class="col-lg-3">Current Time</div>
 	</div>
 	<div class="row title2">
-	  <div class="col-lg-3 current-date"></div>
-	  <div class="col-lg-6"></div>
-	  <div class="col-lg-3 current-time"></div>
+	  <div class="col-lg-3 current-date">&nbsp;</div>
+	  <div class="col-lg-6">&nbsp;</div>
+	  <div class="col-lg-3 current-time">&nbsp;</div>
 	</div>
 	<div class="row title3">
 	  <div class="col-lg-2">Carrier</div>
@@ -66,6 +92,19 @@
 	  <div class="col-lg-1">Train#</div>
 	  <div class="col-lg-1">Track#</div>
 	  <div class="col-lg-3">Status</div>
+	</div>
+	<!-- Some basic empty rows for the board -->
+	<div class="train-info">
+	  <!-- div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div>
+	  <div class="row"><div class="col-lg-12">&nbsp;</div></div-->
 	</div>
   </div>
 </body>
