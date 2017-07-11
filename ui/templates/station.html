@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <style>
+    .container {
+      min-height: 0px !important;
+    }
+    .departure-board {
+	  text-transform: uppercase;
+	  background-color: black;
+	  color: gold;
+	  margin-top:20px;
+    }
+    .station-name-field {
+      color: lightGray;
+    }
+    .title3 {
+      color: lightGray;
+    }
+  </style>
+  <script type="text/javascript">
+	let data_source_url = '{{ data_source_url }}';
+	let station = 'South Station';
+
+	let fetchData = function(url) {
+	  $.get(url, function(data) {
+	    formatData(data);
+	  });
+	};
+
+	let formatData = function(data) {
+      // change some basic information
+      $('.station-name').text(station);
+      $('.current-week-day').text(data.CurrentWeekDay);
+      $('.current-time').text(data.CurrentTime);
+      $('.current-date').text(data.CurrentDate);
+
+	};
+
+    $(document).ready(function() {
+      fetchData(data_source_url);
+    });
+
+  </script>
+</head>
+<body>
+  <div class="container departure-board">
+	<div class="row title1">
+	  <div class="col-lg-3 current-week-day"></div>
+	  <div class="col-lg-6 station-name-field"><span class="station-name">North station</span> train information</div>
+	  <div class="col-lg-3">Current Time</div>
+	</div>
+	<div class="row title2">
+	  <div class="col-lg-3 current-date"></div>
+	  <div class="col-lg-6"></div>
+	  <div class="col-lg-3 current-time"></div>
+	</div>
+	<div class="row title3">
+	  <div class="col-lg-2">Carrier</div>
+	  <div class="col-lg-1">Time</div>
+	  <div class="col-lg-4">Destination</div>
+	  <div class="col-lg-1">Train#</div>
+	  <div class="col-lg-1">Track#</div>
+	  <div class="col-lg-3">Status</div>
+	</div>
+  </div>
+</body>
+</html>

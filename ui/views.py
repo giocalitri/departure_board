@@ -4,6 +4,7 @@ Views for ui app
 import csv
 
 import requests
+from django.urls.base import reverse
 from django.views.generic import TemplateView
 from rest_framework import status
 from rest_framework.response import Response
@@ -39,8 +40,9 @@ class DepartureBoardFeed(APIView):
 
 class Index(TemplateView):
     """Index"""
-    template_name = "index.html"
+    template_name = "station.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['data_source_url'] = reverse('departure_board_feed')
         return context
