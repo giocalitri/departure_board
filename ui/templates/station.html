@@ -9,19 +9,33 @@
   <style>
     .container {
       min-height: 0px !important;
+      margin-top:10px;
+      margin-bottom:10px;
+      width: 1200px !important;
     }
     .departure-board {
 	  text-transform: uppercase;
 	  background-color: black;
 	  color: gold;
-	  margin-top:20px;
 	  padding: 5px;
+	  margin-top:10px;
+      margin-bottom:10px;
     }
     .station-name-field {
       color: lightGray;
     }
+    .align-center {
+      text-align: center;
+    }
+    .align-left {
+      text-align: left;
+    }
+    .align-right {
+      text-align: right;
+    }
     .title3 {
       color: lightGray;
+      font-size: 90%;
     }
   </style>
 
@@ -51,12 +65,12 @@
       data[stationName].forEach(function(trainInfo){
         let $trainInfoElement = $("<div/>", {"class": "row"});
 
-        $("<div/>", {"class": "col-lg-2"}).text('MBTA').appendTo($trainInfoElement);
-        $("<div/>", {"class": "col-lg-1"}).text(trainInfo.ScheduledHour).appendTo($trainInfoElement);
-        $("<div/>", {"class": "col-lg-4"}).text(trainInfo.Destination).appendTo($trainInfoElement);
-        $("<div/>", {"class": "col-lg-1"}).text(trainInfo.Trip).appendTo($trainInfoElement);
-        $("<div/>", {"class": "col-lg-1"}).text(trainInfo.Track).appendTo($trainInfoElement);
-        $("<div/>", {"class": "col-lg-3"}).text(trainInfo.Status).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-xs-2"}).text('MBTA').appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-xs-1"}).text(trainInfo.ScheduledHour).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-xs-4"}).text(trainInfo.Destination).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-xs-1"}).text(trainInfo.Trip).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-xs-1"}).text(trainInfo.Track).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-xs-3"}).text(trainInfo.Status).appendTo($trainInfoElement);
 
         trainInfoElements.push($trainInfoElement);
       });
@@ -91,7 +105,7 @@
 <body>
   <div class="container">
   	<div class="row">
-      <div class="col-lg-12 board-chooser">
+      <div class="col-xs-12 board-chooser">
         <div class="btn-group station-selector" data-toggle="buttons">
           <label class="btn btn-default active" id="NorthStation">
            <input type="radio" name="station_options" autocomplete="off" checked> North Station
@@ -104,35 +118,26 @@
   	</div>
     <div class="departure-board">
 	  <div class="row title1">
-	    <div class="col-lg-3 current-week-day">&nbsp;</div>
-	    <div class="col-lg-6 station-name-field"><span class="station-name">North station</span> train information</div>
-	    <div class="col-lg-3">Current Time</div>
+	    <div class="col-xs-3 current-week-day align-left">&nbsp;</div>
+	    <div class="col-xs-6 station-name-field
+	       align-center"><span class="station-name">North station</span> train information</div>
+	    <div class="col-xs-3 align-right">Current Time</div>
 	  </div>
 	  <div class="row title2">
-	    <div class="col-lg-3 current-date">&nbsp;</div>
-	    <div class="col-lg-6">&nbsp;</div>
-	    <div class="col-lg-3 current-time">&nbsp;</div>
+	    <div class="col-xs-3 current-date align-left">&nbsp;</div>
+	    <div class="col-xs-6">&nbsp;</div>
+	    <div class="col-xs-3 current-time align-right">&nbsp;</div>
 	  </div>
-	  <div class="row title3">
-	    <div class="col-lg-2">Carrier</div>
-	    <div class="col-lg-1">Time</div>
-	    <div class="col-lg-4">Destination</div>
-	    <div class="col-lg-1">Train#</div>
-	    <div class="col-lg-1">Track#</div>
-	    <div class="col-lg-3">Status</div>
+	  <div class="row title3 align-center">
+	    <div class="col-xs-2">Carrier</div>
+	    <div class="col-xs-1">Time</div>
+	    <div class="col-xs-4">Destination</div>
+	    <div class="col-xs-1">Train#</div>
+	    <div class="col-xs-1">Track#</div>
+	    <div class="col-xs-3">Status</div>
 	  </div>
 	  <!-- Some basic empty rows for the board -->
 	  <div class="train-info">
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
-	    <div class="row"><div class="col-lg-12">&nbsp;</div></div>
       </div>
     </div>
   </div>

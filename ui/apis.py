@@ -68,6 +68,9 @@ def get_formatted_mbta_data():
                 # round to the bottom integer
                 formatted_row['LatenessMinutes'] = int(round(int(value)/60))
                 continue
+            elif key == 'Track':
+                formatted_row[key] = value or 'TBD'
+                continue
             formatted_row[key] = value
         # special case: the train is late, so the status need to be updated with the lateness
         if formatted_row['Status'] in ('Delayed', 'Late', ):
