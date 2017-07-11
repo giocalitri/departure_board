@@ -66,10 +66,10 @@
         let $trainInfoElement = $("<div/>", {"class": "row"});
 
         $("<div/>", {"class": "col-xs-2"}).text('MBTA').appendTo($trainInfoElement);
-        $("<div/>", {"class": "col-xs-1"}).text(trainInfo.ScheduledHour).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-xs-1 align-right"}).text(trainInfo.ScheduledHour).appendTo($trainInfoElement);
         $("<div/>", {"class": "col-xs-4"}).text(trainInfo.Destination).appendTo($trainInfoElement);
         $("<div/>", {"class": "col-xs-1"}).text(trainInfo.Trip).appendTo($trainInfoElement);
-        $("<div/>", {"class": "col-xs-1"}).text(trainInfo.Track).appendTo($trainInfoElement);
+        $("<div/>", {"class": "col-xs-1 align-center"}).text(trainInfo.Track).appendTo($trainInfoElement);
         $("<div/>", {"class": "col-xs-3"}).text(trainInfo.Status).appendTo($trainInfoElement);
 
         trainInfoElements.push($trainInfoElement);
