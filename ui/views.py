@@ -36,6 +36,11 @@ class DepartureBoardFeed(APIView):
                 data={'error': 'mbta_data_error'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+        except Exception:
+            return Response(
+                data={'error': 'unknown_error'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 
 class Index(TemplateView):
