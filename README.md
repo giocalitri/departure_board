@@ -2,16 +2,16 @@
 
 Personal exercise to create a Train Departure Board Feed based on the MBTA data feed.
 
-## Horw to run
-This project is based on Python 3.6, Django 1.11 and Django Rest Framework.
+## How to run
+This project uses on Python 3.6, Django and Django Rest Framework.
 
-I have not had the possibility to move to a docker environment yet, so to run this code you need to have Python 3.6 (but it should work on 3.5 as well). I also suggest to create a virtual environment.
+I have not had the possibility to move it to a docker environment yet, so to run this code you need to have Python 3.6 (but it should work on 3.5 as well). I also suggest to create a virtual environment.
 
 When your python environment is ready you will need to install the dependencies
 ```
 pip install -U -r requirements.txt
 ```
-And simply run the code
+And simply start the test web server
 ```
 python manage.py runserver 0.0.0.0:8888
 ```
