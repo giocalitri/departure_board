@@ -17,8 +17,8 @@ python manage.py runserver 0.0.0.0:8888
 ```
 The board should be available at http://localhost:8888/ and it should look like these screenshots:
 
-[North](doc_images/north.png)
-[South](doc_images/south.png)
+![North](doc_images/north.png)
+![South](doc_images/south.png)
 
 You can switch from the North Station to the South Station Departure boards using the buttons on top of the page.
 
